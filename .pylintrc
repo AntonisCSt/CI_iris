@@ -1,0 +1,5 @@
+[pylint]
+disable = missing-docstring, missing-final-newline,singleton-comparison,invalid-name
+
+[MASTER]
+ignore = */__init__.py
