@@ -1,0 +1,19 @@
+name: linting-formatting
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.10
+
+      - name: Install Python dependencies
+        run: pip install black==23.7.0 pylint==2.17.5
+
+      - run: black ./
+      - run: find . -type f -name "*.py" | xargs pylint --recursive=yes .
