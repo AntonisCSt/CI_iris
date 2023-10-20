@@ -1,10 +1,32 @@
 # Continuous integration
 
- mkdir -p .github/workflows/
+
+mkdir -p .github/workflows/
 -p flag with mkdir to create the parent directories if they don't exist.
 
+## Creating our first workflow
 
-### Adding linting and formatting tests
+```yaml
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  saying-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Hello World
+        run: echo "Hello Github World"
+
+      - run: echo "Hello World without run-name"
+
+      - run: ls
+```
+
+
+
+## Adding linting and formatting tests: Starting our Continuous integration
 
 Let's make a workflow for that.
 
@@ -32,8 +54,7 @@ jobs:
 
 ```
 
-
-### Marketplace
+## Marketplace
 
 market-place has some very useful workflows that can be used for many cases: For example check this script that reads a file:
 https://github.com/marketplace/actions/read-file
@@ -66,3 +87,13 @@ jobs:
           flake8: true
 
 ```
+
+if you get an error:  `Received status code 403. Resource not accessible by integration https://docs.github.com/rest/checks/runs#create-a-check-run
+Warning: Some check runs could not be created.`
+
+it is related to fact that we are using the `push` event to trigger the workflow while the `pull` is recommended.
+
+Reference: https://docs.github.com/en/code-security/code-scanning/troubleshooting-code-scanning/resource-not-accessible-by-integration
+
+Exercise: 
+Write a workflow that uses the makefile to perform the tests.

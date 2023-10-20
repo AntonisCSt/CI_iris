@@ -11,3 +11,5 @@ jobs:
         run: echo "Hello Github World"
 
       - run: echo "Hello World without run-name"
+
+      - run: ls
